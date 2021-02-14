@@ -1,0 +1,214 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "XMeme",
+        "description": "Meme Fetching and management",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:8081",
+    "basePath": "/",
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/memes": {
+            "get": {
+                "tags": [
+                    "Memes"
+                ],
+                "summary": "Get latest 100 Memes",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "required": [
+                                "id",
+                                "name",
+                                "caption",
+                                "url"
+                            ],
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "uniqueItems": true,
+                                    "example": "1"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "example": "Rishabh Srivastava"
+                                },
+                                "caption": {
+                                    "type": "string",
+                                    "example": "Rishabh Here"
+                                },
+                                "url": {
+                                    "type": "string",
+                                    "example": "https://picsum.photos/200"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Post a Meme"
+                ],
+                "summary": "Adding a Meme",
+                "parameters": [
+                    {
+                        "name": "Body",
+                        "in": "body",
+                        "description": "Details",
+                        "required": true,
+                        "schema": {
+                            "required": [
+                                "name",
+                                "caption",
+                                "url"
+                            ],
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "example": "Rishabh Srivastava"
+                                },
+                                "caption": {
+                                    "type": "string",
+                                    "example": "Rishabh Here"
+                                },
+                                "url": {
+                                    "type": "string",
+                                    "example": "https://picsum.photos/200"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "required": [
+                                "id"
+                            ],
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "example": "10"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/memes/{id}": {
+            "get": {
+                "tags": [
+                    "Get memes by ID"
+                ],
+                "summary": "Get Memes by ID param",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The Meme ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "required": [
+                                "name",
+                                "id",
+                                "caption",
+                                "url"
+                            ],
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "uniqueItems": true,
+                                    "example": "1"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "example": "Rishabh Srivastava"
+                                },
+                                "caption": {
+                                    "type": "string",
+                                    "example": "Rishabh Here"
+                                },
+                                "url": {
+                                    "type": "string",
+                                    "example": "https://picsum.photos/200"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Update a meme"
+                ],
+                "summary": "Updating a meme",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The Meme ID"
+                    },
+                    {
+                        "name": "Body",
+                        "in": "body",
+                        "description": "Details",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "caption": {
+                                    "type": "string",
+                                    "example": "Rishabh Here"
+                                },
+                                "url": {
+                                    "type": "string",
+                                    "example": "https://picsum.photos/200"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "Id Not found"
+                    },
+                    "409": {
+                        "description": "Confict"
+                    }
+                }
+            }
+        }  
+    }
+}
